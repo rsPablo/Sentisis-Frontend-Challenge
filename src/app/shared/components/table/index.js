@@ -1,5 +1,6 @@
 // table
 
+import moment from "moment";
 import { Loading } from "../loading";
 
 const Table = ({tickets}) => {
@@ -7,9 +8,9 @@ const Table = ({tickets}) => {
 
     const rows = () => {
         return tickets.map((element, index) => {     
-            const { title, type, releaseDate, price } = element
+            const { id, title, type, releaseDate, price } = element
             return (
-                <tr>
+                <tr key={id}>
                     <td>{title}</td>
                     <td>{type}</td>
                     <td>{releaseDate}</td>
