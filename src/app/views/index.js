@@ -1,11 +1,26 @@
 // table
 // .-- react --
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from '../shared/components/table';
+import { ticketsService } from '../shared/services/'
 
 const Home = () => {
+
+    const [data, setData] = useState(null)
+
+    useEffect(() => {
+        fetchTickets()
+    }, [])
+
+    const fetchTickets = () => {
+        ticketsService.getTicket()
+        .then((resp) => {
+            setData(resp)
+        })
+    }
+    
     return (
-        <Table/>
+        data && <Table tickets={data}/>
     )
 }
 

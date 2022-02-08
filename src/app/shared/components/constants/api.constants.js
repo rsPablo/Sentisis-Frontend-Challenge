@@ -1,0 +1,1 @@
+export const API_TICKETS = "https://my-json-server.typicode.com/davidan90/demo/tickets";

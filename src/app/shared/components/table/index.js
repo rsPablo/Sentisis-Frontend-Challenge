@@ -1,38 +1,60 @@
 // table
 
-const Table = (data) => {
+import { Loading } from "../loading";
+
+const Table = ({tickets}) => {
+    console.log(tickets)
+
+    const rows = () => {
+        return tickets.map((element, index) => {     
+            const { title, type, releaseDate, price } = element
+            return (
+                <tr>
+                    <td>{title}</td>
+                    <td>{type}</td>
+                    <td>{releaseDate}</td>
+                    <td>{buttonsSelector()}</td>
+                    <td>{price}</td>
+                </tr>
+            )
+        }); 
+    } 
+
+    const buttonsSelector = () => {
+        return (
+            <div>
+                <button type="button" class="btn btn-success">+</button>
+                <input type="number" id="replyNumber" min="0" data-bind="value:replyNumber" />
+                <button type="button" class="btn btn-danger">-</button>
+            </div>
+
+        )
+    }
    
     return (
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-            </tbody>
-        </table>
+        <div>
+           {tickets.length === 0 ? 
+               <Loading/>
+               :
+               (
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Release Date</th>
+                                <th scope="col">Units</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {rows()}
+                        </tbody>
+                    </table>
+               )
+           }
+        </div>
     )
 
 }
