@@ -1,10 +1,10 @@
 // table
 
 import moment from "moment";
+import ButtonSelector from "../button-selector";
 import { Loading } from "../loading";
 
 const Table = ({tickets}) => {
-    console.log(tickets)
 
     const rows = () => {
         return tickets.map((element, index) => {     
@@ -13,23 +13,16 @@ const Table = ({tickets}) => {
                 <tr key={id}>
                     <td>{title}</td>
                     <td>{type}</td>
-                    <td>{releaseDate}</td>
-                    <td>{buttonsSelector()}</td>
-                    <td>{price}</td>
+                    <td>{moment(releaseDate).format('DD-MM-YYYY')}</td>
+                    <td>
+                        <ButtonSelector
+                            key={index}
+                        />
+                    </td>
+                    <td>{price}€</td>
                 </tr>
             )
         }); 
-    } 
-
-    const buttonsSelector = () => {
-        return (
-            <div>
-                <button type="button" class="btn btn-success">+</button>
-                <input type="number" id="replyNumber" min="0" data-bind="value:replyNumber" />
-                <button type="button" class="btn btn-danger">-</button>
-            </div>
-
-        )
     }
    
     return (

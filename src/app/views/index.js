@@ -15,7 +15,8 @@ const Home = () => {
     const fetchTickets = () => {
         ticketsService.getTicket()
         .then((resp) => {
-            setData(resp)
+            const respSorted = resp.sort((a,b) => b.releaseDate - a.releaseDate)
+            setData(respSorted)
         })
     }
     
