@@ -1,21 +1,36 @@
 // table
 
 import moment from "moment";
+import { useState } from "react";
 import ButtonSelector from "../button-selector";
-import { Loading } from "../loading";
+import Loading from "../loading";
+import ModalInfo from "../modal";
+import { Table } from 'react-bootstrap'
 
-const Table = ({tickets}) => {
+import './table.css'
 
-    const rows = () => {
+const TableData = ({tickets}) => {
+
+    const [showData, setShowData] = useState({show: false, data: {}})
+    const [addUnit, setAddUnit] = useState({})
+
+    const handleClose = () => setShowData({...showData, show: false});
+    const handleAddUnit = () => {
+        setShowData({...showData, show: false})
+        setAddUnit(1)
+    }
+    const handleShow = (element) => setShowData({show: true, data: element});
+
+    const Rows = () => {
         return tickets.map((element, index) => {     
             const { id, title, type, releaseDate, price } = element
             return (
-                <tr key={id}>
+                <tr className="rows" key={id} onClick={() => handleShow(element)}>
                     <td>{title}</td>
                     <td>{type}</td>
                     <td>{moment(releaseDate).format('DD-MM-YYYY')}</td>
                     <td>
-                        <ButtonSelector key={id}/>
+                        <ButtonSelector key={id} addUnit={addUnit}/>
                     </td>
                     <td>{price}€</td>
                 </tr>
@@ -29,7 +44,7 @@ const Table = ({tickets}) => {
                <Loading/>
                :
                (
-                    <table className="table">
+                    <Table striped bordered hover>
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>
@@ -40,15 +55,15 @@ const Table = ({tickets}) => {
                             </tr>
                         </thead>
                         <tbody>
-
-                            {rows()}
+                            <Rows/>
                         </tbody>
-                    </table>
+                    </Table>
                )
            }
+           <ModalInfo showData={showData} handleClose={handleClose} addUnit={handleAddUnit} />
         </div>
     )
 
 }
-export default Table;
+export default TableData;
 
