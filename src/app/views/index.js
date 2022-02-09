@@ -18,6 +18,7 @@ const Home = () => {
             const respSorted = resp.sort((a,b) => b.releaseDate - a.releaseDate)
             setData(respSorted)
         })
+        .catch(error => console.log(error))
     }
     
     return (

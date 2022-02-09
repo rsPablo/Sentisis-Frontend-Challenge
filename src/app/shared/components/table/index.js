@@ -15,9 +15,7 @@ const Table = ({tickets}) => {
                     <td>{type}</td>
                     <td>{moment(releaseDate).format('DD-MM-YYYY')}</td>
                     <td>
-                        <ButtonSelector
-                            key={index}
-                        />
+                        <ButtonSelector key={id}/>
                     </td>
                     <td>{price}€</td>
                 </tr>
