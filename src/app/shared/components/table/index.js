@@ -14,32 +14,35 @@ const TableData = ({tickets}) => {
     const [units, setUnits] = useState([{}])
 
     useEffect(() => {
-        console.log(JSON.parse(window.localStorage.getItem('units')))
-        setUnits(JSON.parse(window.localStorage.getItem('units')));
+        console.log('a')
+        if (!JSON.parse(window.localStorage.getItem('units'))) {
+            setUnits([{}])
+        } else {
+            setUnits(JSON.parse(window.localStorage.getItem('units')));
+        }
     }, []);
     
     useEffect(() => {
+        console.log('b')
         window.localStorage.setItem('units', JSON.stringify(units));
     }, [units]);
 
 
     const handleClose = () => setShowData({...showData, show: false});
-    const handleShow = (element, e, index) => {
-        setShowData({show: true, data: {...element, index: index}})
-    }
+    const handleShow = (element, index) =>  setShowData({show: true, data: {...element, index: index}})
 
     const Rows = () => {
         return tickets.map((element, index) => {     
             const { id, title, type, releaseDate, price } = element
             return (
-                <tr className="rows" key={id} onClick={(e) => {handleShow(element, e, index); window.event.stopPropagation();}}>
-                    <td>{title}</td>
-                    <td>{type}</td>
-                    <td>{moment(releaseDate).format('DD-MM-YYYY')}</td>
+                <tr className="rows" key={id} >
+                    <td onClick={(e) => {handleShow(element, index)}}>{title}</td>
+                    <td onClick={(e) => {handleShow(element, index)}}>{type}</td>
+                    <td onClick={(e) => {handleShow(element, index)}}>{moment(releaseDate).format('DD-MM-YYYY')}</td>
                     <td>
                         {buttonsSelector(index)}
                     </td>
-                    <td>{price}€</td>
+                    <td onClick={(e) => {handleShow(element, index)}}>{price}€</td>
                 </tr>
             )
         }); 
@@ -48,7 +51,7 @@ const TableData = ({tickets}) => {
     const handleUpdate = (index, isMore, e) => {
         const product = tickets[index]
         const newUnits = [...units];
-        if (!newUnits[index] || Object.keys(newUnits[0]).length === 0) {
+        if (!newUnits[index] || Object.keys(newUnits[index]).length === 0) {
             newUnits[index] = {
                 id: product.id,
                 units: isMore ? 1 : 0
@@ -66,6 +69,7 @@ const TableData = ({tickets}) => {
         if (e.stopPropagation) e.stopPropagation();
     }
     const buttonsSelector = (index) => {
+        const values = units[index]?.units ?? 0
         return (
             <div className="container">
                 <button type="button" className="btn btn-success box" onClick={(e) => handleUpdate(index, true, e)}>
@@ -74,7 +78,7 @@ const TableData = ({tickets}) => {
                     </svg>
                 </button>
                 
-                <input className="box" readOnly type="number" value={units[index]?.units}/>
+                <input className="box" readOnly type="number" value={values}/>
     
                 <button type="button" className="btn btn-danger box" onClick={(e) => handleUpdate(index, false, e)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className="bi bi-dash-lg" viewBox="0 0 16 16">
