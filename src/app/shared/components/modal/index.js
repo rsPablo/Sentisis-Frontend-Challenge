@@ -19,4 +19,32 @@ const ModalInfo = ({showData, handleClose, addUnit}) => {
         </Modal>
     )
 }
-export default ModalInfo
+
+const ModalSummary = ({show, units, handleClose}) => {
+    return (
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Summary</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{units.map((el, index) => {
+                return (
+                    <div key={index}>
+                        <span>
+                            {el.name}
+                        </span>
+                        <span>
+                            {el.units}
+                        </span>
+                        <span>
+                            {el.units * el.price}
+                        </span>
+                    </div>
+                )
+            })}</Modal.Body>
+        </Modal>
+    )
+
+}
+
+
+export {ModalInfo, ModalSummary}
