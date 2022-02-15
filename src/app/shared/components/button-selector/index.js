@@ -1,12 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 // styles
 import './buttonSelector.css'
 
-const ButtonSelector = () => {
+const ButtonSelector = ({addUnit}) => {
 
     const [units, setUnits] = useState(0)
-    console.log(units)
+
+    useEffect(() => {
+        if (addUnit) {
+            setUnits(units + addUnit);
+        }
+    }, [])
 
     const handleChange = (value) => {
         if (isNaN(value) || value < 0) {
