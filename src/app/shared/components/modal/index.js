@@ -1,7 +1,7 @@
 import { Modal, Button } from 'react-bootstrap';
 
 const ModalInfo = ({showData, handleClose, addUnit}) => {
-    const {show, data: {title, type, description}} = showData;
+    const {show, data: {index, title, type, description}} = showData;
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -12,7 +12,7 @@ const ModalInfo = ({showData, handleClose, addUnit}) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={addUnit}>
+                    <Button variant="primary" onClick={(e) => addUnit(index, true, e)}>
                         Add
                     </Button>
             </Modal.Footer>
