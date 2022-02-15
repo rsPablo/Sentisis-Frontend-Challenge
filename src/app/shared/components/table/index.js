@@ -12,11 +12,11 @@ const TableData = ({tickets}) => {
 
     const [showData, setShowData] = useState({show: false, data: {}})
     const [showSummary, setShowSummary] = useState(false)
-    const [units, setUnits] = useState([{}])
+    const [units, setUnits] = useState([])
 
     useEffect(() => {
         if (!JSON.parse(window.localStorage.getItem('units'))) {
-            setUnits([{}])
+            setUnits([])
         } else {
             setUnits(JSON.parse(window.localStorage.getItem('units')));
         }
@@ -35,13 +35,13 @@ const TableData = ({tickets}) => {
             const { id, title, type, releaseDate, price } = element
             return (
                 <tr className="rows" key={id} >
-                    <td onClick={(e) => {handleShow(element, index)}}>{title}</td>
-                    <td onClick={(e) => {handleShow(element, index)}}>{type}</td>
-                    <td onClick={(e) => {handleShow(element, index)}}>{moment(releaseDate).format('DD-MM-YYYY')}</td>
+                    <td onClick={() => {handleShow(element, index)}}>{title}</td>
+                    <td onClick={() => {handleShow(element, index)}}>{type}</td>
+                    <td onClick={() => {handleShow(element, index)}}>{moment(releaseDate).format('DD-MM-YYYY')}</td>
                     <td>
                         {buttonsSelector(index)}
                     </td>
-                    <td onClick={(e) => {handleShow(element, index)}}>{price}€</td>
+                    <td onClick={() => {handleShow(element, index)}}>{price}€</td>
                 </tr>
             )
         }); 
@@ -52,13 +52,13 @@ const TableData = ({tickets}) => {
         const newUnits = [...units];
         if (!newUnits[index] || Object.keys(newUnits[index]).length === 0) {
             newUnits[index] = {
-                name: product.title,
+                title: product.title,
                 units: isMore ? 1 : 0,
                 price: product.price
             }
         } else {
             newUnits[index] = {
-                name: product.title,
+                title: product.title,
                 units: isMore ? newUnits[index].units + 1 : newUnits[index]?.units === 0 ? 0 : newUnits[index]?.units - 1,
                 price: product.price
             }
@@ -93,10 +93,10 @@ const TableData = ({tickets}) => {
 
     const SummaryButton = () => {
 
-        if (units.length > 1) {
+        if (units.length !== 0) {
             return (
                 <Button variant="primary" className="btn shopIcon" onClick={() => setShowSummary(true)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-cart4" viewBox="0 0 16 16">
                         <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
                     </svg>
                 </Button>
@@ -131,7 +131,7 @@ const TableData = ({tickets}) => {
                )
            }
            <ModalInfo showData={showData} handleClose={handleClose} addUnit={handleUpdate}/>
-           <ModalSummary show={showSummary} handleClose={() => setShowSummary(false)} units={units}/>
+           <ModalSummary show={showSummary} handleClose={() => setShowSummary(false)} values={[...units]}/>
         </div>
     )
 
