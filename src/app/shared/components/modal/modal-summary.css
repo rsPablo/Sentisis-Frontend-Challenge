@@ -1,0 +1,12 @@
+.body-cotainer {
+    display: flex;
+    flex-direction: row;
+}
+
+span {
+    padding-left: 5px;
+}
+
+.text-total-price {
+    font-weight: bold;
+}

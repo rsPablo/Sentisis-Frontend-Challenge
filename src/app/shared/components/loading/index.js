@@ -1,10 +1,11 @@
-
-export const Loading = () => {
+import { Spinner } from 'react-bootstrap'
+import './loading.css'
+const Loading = () => {
     return (
-        <div class="d-flex justify-content-center">
-            <div class="spinner-border text-success" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
+        <div className="loading-container">
+            <Spinner className="loading-size" animation="border" variant="warning"/>
+            <span className="loading-text">Loading...</span>
         </div>
     )
-}   
+} 
+export default Loading
