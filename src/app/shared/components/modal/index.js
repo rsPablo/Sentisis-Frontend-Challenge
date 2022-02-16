@@ -59,13 +59,13 @@ const ModalSummary = ({show, values, handleClose}) => {
                     <tr >
                         <td>{el.title}</td>
                         <td>{el.units}</td>
-                        <td>{el.price * el.units}</td>
+                        <td>{el.price * el.units}€</td>
                     </tr>
                 ): null}
                 {index === sortedList.length - 1 ? (
-                     <tr>
+                     <tr className="text-total-price">
                         <td colSpan={2}>Total to be paid</td>
-                        <td>{count}</td>
+                        <td>{count}€</td>
                     </tr>
                 ): null}
             </React.Fragment>
