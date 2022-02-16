@@ -4,6 +4,13 @@ Este proyecto ha sido realizado en React js con clases funcionales
 
 ## Lanzamiento
 
+Para el proyecto hace falta una **version de node 16.14.0 o superior**
+
+En la rama main realizamos un 
+### `npm install`
+
+Una vez terminado lanzamos 
+
 ### `npm start`
 
 Se abrirá la aplicación en la ruta [http://localhost:3000](http://localhost:3000)
