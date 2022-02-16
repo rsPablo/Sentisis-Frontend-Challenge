@@ -10,10 +10,16 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.container {
+.container-selector {
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+.container-table-button {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
 }
 
 .box {
@@ -21,6 +27,13 @@ input[type=number] {
     width: 50px;
     height: 50px;
     margin-left: 10px;
+}
+
+.shopIcon {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    align-self: flex-end;
 }
 
 .rows {
