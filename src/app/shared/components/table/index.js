@@ -91,8 +91,9 @@ const TableData = ({tickets}) => {
     }
 
     const SummaryButton = () => {
-
-        if (units.length !== 0) {
+        console.log(units)
+        const someUnits = units && units.find(e => e && e.units !== 0 )
+        if (someUnits) {
             return (
                 <Button variant="primary" className="btn shopIcon" onClick={() => setShowSummary(true)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-cart4" viewBox="0 0 16 16">
@@ -124,7 +125,7 @@ const TableData = ({tickets}) => {
                 <SummaryButton className="shopIcon"/>
             </div>
            <ModalInfo showData={showData} handleClose={handleClose} addUnit={handleUpdate}/>
-           <ModalSummary show={showSummary} handleClose={() => setShowSummary(false)} values={[...units]}/>
+           <ModalSummary show={showSummary} handleClose={() => setShowSummary(false)} values={[...units.filter(e => e)]}/>
         </div>
     )
 

@@ -1,18 +1,42 @@
-import { Modal, Button, Table } from 'react-bootstrap';
+import React from 'react';
+import { Modal, Button, Table, Badge } from 'react-bootstrap';
 import './modal-summary.css'
 const ModalInfo = ({showData, handleClose, addUnit}) => {
     const {show, data: {index, title, type, description}} = showData;
+    let badge = null;
+    switch (type) {
+        case "show":
+            badge = <Badge bg="success">{type}</Badge>
+            break;
+        case "talk":
+            badge = <Badge bg="primary">{type}</Badge>
+            break;
+        case "musical":
+            badge = <Badge bg="info">{type}</Badge>
+            break;
+    }
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>{title} - {type}</Modal.Title>
+                <Modal.Title>
+                    <h3>
+                       {title} {badge}
+                    </h3>
+                </Modal.Title>
             </Modal.Header>
-            <Modal.Body>{description}</Modal.Body>
+            <Modal.Body>
+                <div>
+                    <h5>
+                        Description: 
+                    </h5>
+                    {description}
+                </div>
+            </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={(e) => addUnit(index, true, e)}>
+                    <Button variant="success" onClick={(e) => addUnit(index, true, e)}>
                         Add
                     </Button>
             </Modal.Footer>
@@ -22,34 +46,31 @@ const ModalInfo = ({showData, handleClose, addUnit}) => {
 
 const ModalSummary = ({show, values, handleClose}) => {
     const sortedList = values && values.sort((a,b) => b.units - a.units)
-    console.log(sortedList)
     let count = 0
     values.forEach(element => {
         if (element) {
             count = (parseInt(element.price) * parseInt(element.units)) + count
-            console.log(element.price, element.units)
         }
     });
     const body = sortedList.map((el, index) => {
-        if (el) {   
-            return (
-                <tr key={index} >
-                   <td>{el.title}</td>
-                   <td>{el.units}</td>
-                   <td>{el.price * el.units}</td>
-                </tr>
-            )
-        }
-        if (index === sortedList.length - 1) {
-            return (
-                <tr>
-                    <td colSpan={2}>Total to be paid</td>
-                    <td>{count}</td>
-                </tr>
-            )
-        } 
+        return (
+            <React.Fragment key={el.title}>
+                {el.units !== 0 ? (
+                    <tr >
+                        <td>{el.title}</td>
+                        <td>{el.units}</td>
+                        <td>{el.price * el.units}</td>
+                    </tr>
+                ): null}
+                {index === sortedList.length - 1 ? (
+                     <tr>
+                        <td colSpan={2}>Total to be paid</td>
+                        <td>{count}</td>
+                    </tr>
+                ): null}
+            </React.Fragment>
+        )
     })
-    console.log(body)
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -67,6 +88,7 @@ const ModalSummary = ({show, values, handleClose}) => {
                     <tbody>
                         {body}
                     </tbody>
+
                 </Table>
             </Modal.Body>
         </Modal>
