@@ -26,11 +26,12 @@ const ModalSummary = ({show, values, handleClose}) => {
     let count = 0
     values.forEach(element => {
         if (element) {
-            count = (parseInt(element.price) * parseInt(element.unit)) + count
+            count = (parseInt(element.price) * parseInt(element.units)) + count
+            console.log(element.price, element.units)
         }
     });
     const body = sortedList.map((el, index) => {
-        if (el) {     
+        if (el) {   
             return (
                 <tr key={index} >
                    <td>{el.title}</td>
@@ -39,7 +40,16 @@ const ModalSummary = ({show, values, handleClose}) => {
                 </tr>
             )
         }
+        if (index === sortedList.length - 1) {
+            return (
+                <tr>
+                    <td colSpan={2}>Total to be paid</td>
+                    <td>{count}</td>
+                </tr>
+            )
+        } 
     })
+    console.log(body)
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
