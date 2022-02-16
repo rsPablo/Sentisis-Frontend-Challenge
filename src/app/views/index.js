@@ -9,7 +9,7 @@ const Home = () => {
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(true) 
     useEffect(() => {
-        setTimeout(() => fetchTickets(), 3000)
+        setTimeout(() => fetchTickets(), 2000)
         
     }, [])
 

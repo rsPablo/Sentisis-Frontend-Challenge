@@ -19,7 +19,7 @@ input[type=number] {
 .container-table-button {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 20px;
 }
 
 .box {
