@@ -1,0 +1,16 @@
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.loading-size {
+    width: 10rem !important;
+    height: 10rem !important;
+} 
+
+.loading-text {
+    color: burlywood ;
+} 

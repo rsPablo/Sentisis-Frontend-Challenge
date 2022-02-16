@@ -2,7 +2,6 @@
 
 import moment from "moment";
 import { useEffect, useState } from "react";
-import Loading from "../loading";
 import { ModalInfo, ModalSummary } from "../modal";
 import { Table, Button } from 'react-bootstrap'
 
@@ -107,29 +106,23 @@ const TableData = ({tickets}) => {
    
     return (
         <div>
-           {tickets.length === 0 ? 
-               <Loading/>
-               :
-               (
-                <div className="container-table-button">
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Release Date</th>
-                                <th scope="col">Units</th>
-                                <th scope="col">Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <Rows/>
-                        </tbody>
-                    </Table>
-                    <SummaryButton className="shopIcon"/>
-                </div>
-               )
-           }
+            <div className="container-table-button">
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Release Date</th>
+                            <th scope="col">Units</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <Rows/>
+                    </tbody>
+                </Table>
+                <SummaryButton className="shopIcon"/>
+            </div>
            <ModalInfo showData={showData} handleClose={handleClose} addUnit={handleUpdate}/>
            <ModalSummary show={showSummary} handleClose={() => setShowSummary(false)} values={[...units]}/>
         </div>
