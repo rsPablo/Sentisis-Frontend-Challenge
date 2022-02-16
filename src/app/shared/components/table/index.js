@@ -91,7 +91,6 @@ const TableData = ({tickets}) => {
     }
 
     const SummaryButton = () => {
-        console.log(units)
         const someUnits = units && units.find(e => e && e.units !== 0 )
         if (someUnits) {
             return (
