@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Button, Table, Badge } from 'react-bootstrap';
-import './modal-summary.css'
+import './modal.css'
 const ModalInfo = ({showData, handleClose, addUnit}) => {
     const {show, data: {index, title, type, description}} = showData;
     let badge = null;
@@ -33,10 +33,10 @@ const ModalInfo = ({showData, handleClose, addUnit}) => {
                 </div>
             </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button id="btn-close" variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="success" onClick={(e) => addUnit(index, true, e)}>
+                    <Button id="btn-add" variant="success" onClick={(e) => addUnit(index, true, e)}>
                         Add
                     </Button>
             </Modal.Footer>

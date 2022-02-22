@@ -34,7 +34,7 @@ const TableData = ({tickets}) => {
             const { id, title, type, releaseDate, price } = element
             return (
                 <tr className="rows" key={id} >
-                    <td onClick={() => {handleShow(element, index)}}>{title}</td>
+                    <td id="title_row" onClick={() => {handleShow(element, index)}}>{title}</td>
                     <td onClick={() => {handleShow(element, index)}}>{type}</td>
                     <td onClick={() => {handleShow(element, index)}}>{moment(releaseDate).format('DD-MM-YYYY')}</td>
                     <td>
@@ -64,9 +64,6 @@ const TableData = ({tickets}) => {
         }
         setUnits(newUnits);
         handleClose();
-
-        e.cancelBubble = true;
-        if (e.stopPropagation) e.stopPropagation();
     }
     const buttonsSelector = (index) => {
         const values = units[index]?.units ?? 0
@@ -74,14 +71,14 @@ const TableData = ({tickets}) => {
             <div className="container-selector ">
                 {/* <button type="button" className="btn btn-success box" onClick={(e) => handleUpdate(index, true, e)}>
                 </button> */}
-                <Button variant="success" className="btn btn-success box" onClick={(e) => handleUpdate(index, true, e)}>
+                <Button id={`btn-up-${index}`} variant="success" className="btn btn-success box" onClick={(e) => handleUpdate(index, true, e)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className="bi bi-plus-lg" viewBox="0 0 16 16">
                         <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                     </svg>
                 </Button>               
-                <input className="box" readOnly type="number" value={values}/>
+                <input id={`value-${index}`} className="box" readOnly type="number" value={values}/>
 
-                <Button variant="danger" className="btn btn-danger box" onClick={(e) => handleUpdate(index, false, e)}>
+                <Button id={`btn-down-${index}`} variant="danger" className="btn btn-danger box" onClick={(e) => handleUpdate(index, false, e)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className="bi bi-dash-lg" viewBox="0 0 16 16">
                         <path fillRule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
                     </svg>

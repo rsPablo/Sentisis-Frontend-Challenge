@@ -12,7 +12,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true) 
     const [fetchError, setFechError] = useState(false)
     useEffect(() => {
-        setTimeout(() => fetchTickets(), 2000)
+        setTimeout(() => fetchTickets(), 1000)
     }, [])
 
     const fetchTickets = () => {
